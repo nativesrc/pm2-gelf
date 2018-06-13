@@ -9,11 +9,11 @@ const conf = pmx.initModule();
 
 var Gelf = require('gelf');
 var gelf = new Gelf({
-    graylogPort: conf.graylogPort,
-    graylogHostname: conf.graylogHostname,
-    connection: conf.connection,
-    maxChunkSizeWan: conf.maxChunkSizeWan,
-    maxChunkSizeLan: conf.maxChunkSizeLan
+    graylogPort: process.env.GRAYLOG_PORT,
+    graylogHostname: process.env.GRAYLOG_HOSTNAME,
+    connection: process.env.CONNECTION,
+    maxChunkSizeWan: process.env.GRAYLOG_CHUNKSIZE_WAN,
+    maxChunkSizeLan: process.env.GRAYLOG_CHUNKSIZE_LAN
 });
 
 pm2.Client.launchBus(function(err, bus) {
