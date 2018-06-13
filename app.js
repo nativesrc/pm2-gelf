@@ -1,11 +1,8 @@
 /* eslint-disable no-alert, no-console */
 'use strict';
 const pm2 = require('pm2');
-const pmx = require('pmx');
 const os = require('os');
 const hostname = os.hostname();
-
-const conf = pmx.initModule();
 
 var Gelf = require('gelf');
 var gelf = new Gelf({
@@ -19,7 +16,7 @@ var gelf = new Gelf({
 pm2.Client.launchBus(function(err, bus) {
     if (err) return console.error('PM2 Loggly:', err);
 
-    console.log('PM2 GELF Connector: Bus connected, sending logs to ' + conf.graylogHostname + ':' + conf.graylogPort);
+    console.log('PM2 GELF Connector: Bus connected, sending logs to ' + process.env.GRAYLOG_HOSTNAME + ':' + process.env.GRAYLOG_PORT);
 
     bus.on('log:out', function(log) {
         if (log.process.name !== 'pm2-gelf') {
