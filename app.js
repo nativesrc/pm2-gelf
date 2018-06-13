@@ -11,9 +11,9 @@ var Gelf = require('gelf');
 var gelf = new Gelf({
     graylogPort: process.env.GRAYLOG_PORT,
     graylogHostname: process.env.GRAYLOG_HOSTNAME,
-    connection: process.env.CONNECTION,
-    maxChunkSizeWan: process.env.GRAYLOG_CHUNKSIZE_WAN,
-    maxChunkSizeLan: process.env.GRAYLOG_CHUNKSIZE_LAN
+    connection: 'wan',
+    maxChunkSizeWan: 1420,
+    maxChunkSizeLan: 8154
 });
 
 pm2.Client.launchBus(function(err, bus) {
